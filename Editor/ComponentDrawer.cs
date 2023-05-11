@@ -2,7 +2,6 @@
 using LeoECSLite.UnityAdapter.Editor.Elements;
 using LeoECSLite.UnityAdapter.Editor.Extensions.Property;
 using LeoECSLite.UnityAdapter.Editor.Extensions.UIElement;
-using SolidUtilities.Editor;
 using UnityEditor;
 using UnityEngine.UIElements;
 
@@ -82,7 +81,7 @@ namespace LeoECSLite.UnityAdapter.Editor {
     private bool               Empty()             => ComponentProperty().GetChildren(1).Count == 0;
     private string             ComponentName()     => Target().RawComponent.GetType().Name;
     private string             LastComponentName() => Target().SerializedComponentType.Split(ASSEMBLY_QUALIFIED_NAME_SEPARATOR).First().Split(TYPE_SEPARATOR).Last();
-    private ComponentAdapter   Target()            => (ComponentAdapter) _property.GetObject();
+    private ComponentAdapter   Target()            => (ComponentAdapter) _property.managedReferenceValue;
     private SerializedProperty ComponentProperty() => _property.FindPropertyRelative(COMPONENT_FIELD);
   }
 }

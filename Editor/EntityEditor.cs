@@ -140,11 +140,12 @@ namespace LeoECSLite.UnityAdapter.Editor {
       view.BindProperty(GetPropertyOf(adapter));
 
       EditorApplication.delayCall += () => {
-        view.Q<ControlHeader>()
-            .AddButton(
-               DEL_BTN_TEXT,
-               () => Components.Remove(adapter)
-             );
+        view
+         .Q<ControlHeader>()?
+         .AddButton(
+            DEL_BTN_TEXT,
+            () => Components.Remove(adapter)
+          );
       };
 
       return view;
