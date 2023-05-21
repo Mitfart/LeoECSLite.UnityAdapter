@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace LeoECSLite.UnityAdapter.Editor.Elements {
+namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Editor.Elements {
   public class ControlHeader : VisualElement {
     private readonly Dictionary<string, Button> _controlButtons = new();
 

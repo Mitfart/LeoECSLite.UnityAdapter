@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Git.Extensions.Editor;
+using Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Editor.Extensions.SearchWindow;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-namespace LeoECSLite.UnityAdapter.Editor.Search {
+namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Editor.Search {
   public class ComponentsSearchWindow : ScriptableObject, ISearchWindowProvider {
     private const string TITLE = "Components";
 

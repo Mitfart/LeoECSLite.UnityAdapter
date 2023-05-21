@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Leopotam.EcsLite;
 
-namespace LeoECSLite.UnityAdapter.WorldsLocator {
+namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Runtime.WorldsLocator {
   public static class EcsWorldsLocator {
     private static readonly Dictionary<string, EcsWorld> _Worlds = new();
 

@@ -1,10 +1,10 @@
 using System;
-using Extensions.Runtime.Ecs.World;
 using Leopotam.EcsLite;
+using Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Runtime.Extensions.Ecs.World;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace LeoECSLite.UnityAdapter {
+namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Runtime {
   [Serializable]
   public class ComponentAdapter {
     [SerializeReference] private object component;

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using LeoECSLite.UnityAdapter.WorldsLocator;
 using Leopotam.EcsLite;
+using Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Runtime.WorldsLocator;
 using UnityEngine;
 
-namespace LeoECSLite.UnityAdapter {
+namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Runtime {
   [DisallowMultipleComponent]
   public class Entity : MonoBehaviour {
     // hack: using "SerializeReference" to get value without reflection

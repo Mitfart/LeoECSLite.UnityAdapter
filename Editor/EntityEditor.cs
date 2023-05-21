@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Extensions.Editor.Property;
-using Git.Extensions.Editor;
-using LeoECSLite.UnityAdapter.Editor.Elements;
-using LeoECSLite.UnityAdapter.Editor.Search;
+using Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Editor.Elements;
+using Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Editor.Extensions.Property;
+using Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Editor.Extensions.UIElement;
+using Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Editor.Search;
+using Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Runtime;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace LeoECSLite.UnityAdapter.Editor {
+namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Editor {
   [CustomEditor(typeof(Entity), true)]
   public class EntityEditor : UnityEditor.Editor {
     private const string COMPONENTS_PROPERTY_NAME = nameof(Entity.components);
