@@ -1,25 +1,23 @@
 ﻿using System.Linq;
+using Git.Extensions.Editor;
 using LeoECSLite.UnityAdapter.Editor.Elements;
-using LeoECSLite.UnityAdapter.Editor.Extensions.Property;
-using LeoECSLite.UnityAdapter.Editor.Extensions.UIElement;
 using UnityEditor;
 using UnityEngine.UIElements;
 
 namespace LeoECSLite.UnityAdapter.Editor {
   [CustomPropertyDrawer(typeof(ComponentAdapter), true)]
   public class ComponentDrawer : PropertyDrawer {
-    private const string        COMPONENT_FIELD                   = "component";
-    private const string        ERROR_ICON                        = "console.erroricon";
-    private const string        ASSEMBLY_QUALIFIED_NAME_SEPARATOR = ",";
-    private const string        TYPE_SEPARATOR                    = ".";
-    private       ControlHeader _controlHeader;
-    private       VisualElement _fields;
-    private       VisualElement _main;
+    private const string COMPONENT_FIELD                   = "component";
+    private const string ERROR_ICON                        = "console.erroricon";
+    private const string ASSEMBLY_QUALIFIED_NAME_SEPARATOR = ",";
+    private const string TYPE_SEPARATOR                    = ".";
 
     private SerializedProperty _property;
 
-
     private VisualElement _root;
+    private ControlHeader _controlHeader;
+    private VisualElement _main;
+    private VisualElement _fields;
 
 
 
@@ -46,7 +44,7 @@ namespace LeoECSLite.UnityAdapter.Editor {
        .AddChild(_main);
 
       if (!Target().Broken)
-        _main.AddChild(_fields.AddChildProperties(ComponentProperty()));
+        _main.AddChild(_fields.AddChildPropertiesOf(ComponentProperty()));
     }
 
     private void InitElements() {

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Git.Extensions.Editor;
 using LeoECSLite.UnityAdapter.Editor.Elements;
-using LeoECSLite.UnityAdapter.Editor.Extensions.Property;
-using LeoECSLite.UnityAdapter.Editor.Extensions.UIElement;
 using LeoECSLite.UnityAdapter.Editor.Search;
 using UnityEditor;
 using UnityEditor.UIElements;
@@ -19,14 +18,12 @@ namespace LeoECSLite.UnityAdapter.Editor {
     private const string DEL_BTN_TEXT = "Del";
 
     private readonly Dictionary<ComponentAdapter, VisualElement> _componentsViews = new();
-    private          Button                                      _addComponentBtn;
-    private          Box                                         _components;
-    private          VisualElement                               _componentsContainer;
-    private          Box                                         _control;
-    private          Box                                         _main;
-
 
     private VisualElement _root;
+    private Box           _main;
+    private Box           _control;
+    private Button        _addComponentBtn;
+    private Box           _components;
 
     private Entity                 Target     => (Entity) target;
     private List<ComponentAdapter> Components => Target.components;
@@ -43,19 +40,18 @@ namespace LeoECSLite.UnityAdapter.Editor {
 
 
     private void CreateElements() {
-      _root                = new VisualElement();
-      _main                = new Box();
-      _control             = new Box();
-      _addComponentBtn     = new Button(ChooseAndAdd) { text = ADD_BTN_TEXT };
-      _components          = new Box();
-      _componentsContainer = new VisualElement();
+      _root            = new VisualElement();
+      _main            = new Box();
+      _control         = new Box();
+      _addComponentBtn = new Button(ChooseAndAdd) { text = ADD_BTN_TEXT };
+      _components      = new Box();
     }
 
     private void StructureElements() {
       _root
        .AddChild(_main.AddScriptField(serializedObject))
        .AddChild(_control.AddChild(_addComponentBtn))
-       .AddChild(_components.AddChild(_componentsContainer));
+       .AddChild(_components);
     }
 
     private void InitElements() {
@@ -79,11 +75,11 @@ namespace LeoECSLite.UnityAdapter.Editor {
     }
 
     private void InitComponents() {
-      SerializedProperty sizeProperty = ComponentsProperty().GetChildren(1)[0];
+      SerializedProperty sizeProperty = SizeProperty();
 
-      RefreshComponentViews();
+      RefreshComponentsViews();
 
-      _root.TrackPropertyValue(sizeProperty, _ => RefreshComponentViews());
+      _root.TrackPropertyValue(sizeProperty, _ => RefreshComponentsViews());
     }
 
 
@@ -97,7 +93,7 @@ namespace LeoECSLite.UnityAdapter.Editor {
 
 
 
-    private void RefreshComponentViews() {
+    private void RefreshComponentsViews() {
       DelComponentViews();
       AddComponentViews();
     }
@@ -106,7 +102,7 @@ namespace LeoECSLite.UnityAdapter.Editor {
       IEnumerable<ComponentAdapter> removed = RemovedComponents();
 
       foreach (ComponentAdapter adapter in removed) {
-        _componentsContainer.Remove(_componentsViews[adapter]);
+        _components.Remove(_componentsViews[adapter]);
         _componentsViews.Remove(adapter);
       }
     }
@@ -118,7 +114,7 @@ namespace LeoECSLite.UnityAdapter.Editor {
 
         VisualElement compView = CreateComponentView(adapter);
 
-        _componentsContainer.Add(compView);
+        _components.Add(compView);
         _componentsViews.Add(adapter, compView);
       }
     }
@@ -139,14 +135,7 @@ namespace LeoECSLite.UnityAdapter.Editor {
 
       view.BindProperty(GetPropertyOf(adapter));
 
-      EditorApplication.delayCall += () => {
-        view
-         .Q<ControlHeader>()?
-         .AddButton(
-            DEL_BTN_TEXT,
-            () => Components.Remove(adapter)
-          );
-      };
+      EditorApplication.delayCall += () => { view.Q<ControlHeader>()?.AddButton(DEL_BTN_TEXT, () => Components.Remove(adapter)); };
 
       return view;
     }
@@ -179,6 +168,7 @@ namespace LeoECSLite.UnityAdapter.Editor {
 
     private bool HasAdapter(Type component) => Components.Any(adapter => adapter.ComponentType == component);
 
+    private SerializedProperty SizeProperty()       => ComponentsProperty().GetChildren(1)[0];
     private SerializedProperty ComponentsProperty() => serializedObject.FindProperty(COMPONENTS_PROPERTY_NAME);
   }
 }

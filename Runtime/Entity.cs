@@ -7,6 +7,7 @@ using UnityEngine;
 namespace LeoECSLite.UnityAdapter {
   [DisallowMultipleComponent]
   public class Entity : MonoBehaviour {
+    // hack: using "SerializeReference" to get value without reflection
     [SerializeReference] public List<ComponentAdapter> components = new();
 
     public string        worldName;
@@ -44,6 +45,11 @@ namespace LeoECSLite.UnityAdapter {
 
 
     private EcsPackedEntityWithWorld CreateEntity(EcsWorld world) {
+#if UNITY_EDITOR
+      if (components.Count <= 0)
+        throw new Exception("Can't Create Empty Entity!");
+#endif
+
       int e = world.NewEntity();
       AddComponents(e, world);
       OnCreateEntity(e, world);

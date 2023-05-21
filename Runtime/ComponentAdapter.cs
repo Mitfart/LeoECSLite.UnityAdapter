@@ -1,5 +1,5 @@
 using System;
-using LeoECSLite.UnityAdapter.Extentions.Ecs.World;
+using Git.Extensions.Ecs;
 using Leopotam.EcsLite;
 using Unity.VisualScripting;
 using UnityEngine;

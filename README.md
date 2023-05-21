@@ -62,7 +62,7 @@ void Start() {
 ### Объявление компонента
 ```c#
 [Serializable]
-[EcsComponent]
+[EcsComponent] // <-- обязательный атрибут
 public struct Comp {
     ...
 }
@@ -85,7 +85,7 @@ public struct Comp {
 
 # Известные проблемы
 
-### При переименовании / изменении неймспейса типа компонент "ломается"
+### При переименовании / изменении неймспейса типа, компонент "ломается"
 Решение:
 - Добавьте аттрибут [MovedFrom](https://github.com/Unity-Technologies/UnityCsReference/blob/master/Runtime/Export/Scripting/APIUpdating/UpdatedFromAttribute.cs)
 ```cs
