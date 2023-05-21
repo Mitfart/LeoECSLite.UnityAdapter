@@ -1,3 +1,17 @@
 {
-  "name": "LeoECSLite.UnityAdapter"
+    "name": "LeoECSLite.UnityAdapter",
+    "rootNamespace": "Mitfart.LeoECSLite.UnityAdapter",
+    "references": [
+        "Leopotam.EcsLite",
+        "Unity.VisualScripting.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
