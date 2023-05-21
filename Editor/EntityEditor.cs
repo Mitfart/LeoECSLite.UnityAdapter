@@ -19,12 +19,12 @@ namespace LeoECSLite.UnityAdapter.Editor {
     private const string DEL_BTN_TEXT = "Del";
 
     private readonly Dictionary<ComponentAdapter, VisualElement> _componentsViews = new();
+    private          Button                                      _addComponentBtn;
+    private          Box                                         _components;
+    private          Box                                         _control;
+    private          Box                                         _main;
 
     private VisualElement _root;
-    private Box           _main;
-    private Box           _control;
-    private Button        _addComponentBtn;
-    private Box           _components;
 
     private Entity                 Target     => (Entity) target;
     private List<ComponentAdapter> Components => Target.components;
