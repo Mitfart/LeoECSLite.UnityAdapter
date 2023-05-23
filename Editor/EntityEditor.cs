@@ -20,12 +20,12 @@ namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapte
     private const string DEL_BTN_TEXT = "Del";
 
     private readonly Dictionary<ComponentAdapter, VisualElement> _componentsViews = new();
-    private          Button                                      _addComponentBtn;
-    private          Box                                         _components;
-    private          Box                                         _control;
-    private          Box                                         _main;
 
     private VisualElement _root;
+    private Box           _main;
+    private Box           _control;
+    private Button        _addComponentBtn;
+    private Box           _components;
 
     private Entity                 Target     => (Entity) target;
     private List<ComponentAdapter> Components => Target.components;
@@ -77,11 +77,9 @@ namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapte
     }
 
     private void InitComponents() {
-      SerializedProperty sizeProperty = SizeProperty();
-
       RefreshComponentsViews();
 
-      _root.TrackPropertyValue(sizeProperty, _ => RefreshComponentsViews());
+      _root.TrackPropertyValue(SizeProperty(), _ => RefreshComponentsViews());
     }
 
 
@@ -96,15 +94,14 @@ namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapte
 
 
     private void RefreshComponentsViews() {
+      RefreshData();
       DelComponentViews();
       AddComponentViews();
     }
 
     private void DelComponentViews() {
-      IEnumerable<ComponentAdapter> removed = RemovedComponents();
-
-      foreach (ComponentAdapter adapter in removed) {
-        _components.Remove(_componentsViews[adapter]);
+      foreach (ComponentAdapter adapter in RemovedComponents()) {
+        _componentsViews[adapter].RemoveFromHierarchy();
         _componentsViews.Remove(adapter);
       }
     }
@@ -152,7 +149,7 @@ namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapte
         return false;
       }
 
-      Target.AddAdapter(component);
+      Target.Add(component);
       return true;
     }
 
@@ -172,5 +169,7 @@ namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapte
 
     private SerializedProperty SizeProperty()       => ComponentsProperty().GetChildren(1)[0];
     private SerializedProperty ComponentsProperty() => serializedObject.FindProperty(COMPONENTS_PROPERTY_NAME);
+
+    private void RefreshData() => serializedObject.Update();
   }
 }

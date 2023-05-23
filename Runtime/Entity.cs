@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Leopotam.EcsLite;
 using Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Runtime.WorldsLocator;
 using UnityEngine;
@@ -58,9 +59,18 @@ namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapte
 
 
 
-    public void AddAdapter(Type componentType) {
+    public void Add(Type componentType) {
       object component = Activator.CreateInstance(componentType);
       components.Add(new ComponentAdapter(component));
+    }
+
+    public void Del(Type componentType) {
+      components.Remove(
+        components.First(
+          a =>
+            a.ComponentType == componentType
+        )
+      );
     }
 
 
