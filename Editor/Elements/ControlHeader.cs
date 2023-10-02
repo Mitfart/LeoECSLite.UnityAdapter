@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Editor.Elements {
+namespace Mitfart.LeoECSLite.UnityAdapter.Editor.Elements {
   public class ControlHeader : VisualElement {
     private readonly Dictionary<string, Button> _controlButtons = new();
 
@@ -88,7 +88,16 @@ namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapte
       if (_controlButtons.ContainsKey(text))
         throw new Exception($"Already has [{text}]-control button!");
 
-      var btn = new Button(onClick) { text = text };
+      var btn = new Button(onClick) {
+        text = text,
+        style = {
+          marginBottom = 0,
+          marginLeft   = 0,
+          marginRight  = 0,
+          marginTop    = 0
+        }
+      };
+      
       Add(btn);
       _controlButtons.Add(text, btn);
     }

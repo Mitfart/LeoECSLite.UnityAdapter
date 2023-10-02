@@ -1,12 +1,13 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using Leopotam.EcsLite;
 
-namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Runtime.Extensions.Ecs.World {
+namespace Mitfart.LeoECSLite.UnityAdapter.Extensions {
   public static class GetPoolExt {
     private static readonly MethodInfo _Get_Pool_Method_Info = typeof(EcsWorld).GetMethod(nameof(EcsWorld.GetPool));
 
 
-    public static IEcsPool GetPool(this EcsWorld world, System.Type type) {
+    public static IEcsPool GetPool(this EcsWorld world, Type type) {
       IEcsPool pool = world.GetPoolByType(type);
 
       if (pool != null)

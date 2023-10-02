@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Runtime.Attributes {
+namespace Mitfart.LeoECSLite.UnityAdapter.Attributes {
   [AttributeUsage(AttributeTargets.Struct)]
   public class EcsComponentAttribute : Attribute { }
 }

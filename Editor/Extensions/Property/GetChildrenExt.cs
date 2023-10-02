@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 
-namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Editor.Extensions.Property {
+namespace Mitfart.LeoECSLite.UnityAdapter.Editor.Extensions.Property {
   public static class GetChildrenExt {
     public static IList<SerializedProperty> GetChildren(this SerializedProperty property, int maxAmount = int.MaxValue) {
       SerializedProperty rootProperty = property.Copy();

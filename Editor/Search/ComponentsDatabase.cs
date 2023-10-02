@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Runtime.Attributes;
+using Mitfart.LeoECSLite.UnityAdapter.Attributes;
 using UnityEditor;
 
-namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Editor.Search {
+namespace Mitfart.LeoECSLite.UnityAdapter.Editor.Search {
   public static class ComponentsDatabase {
     private static readonly List<Type> _SerializableComponents = new();
 

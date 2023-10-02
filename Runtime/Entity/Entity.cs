@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Leopotam.EcsLite;
-using Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Runtime.WorldsLocator;
 using UnityEngine;
 
-namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Runtime {
+namespace Mitfart.LeoECSLite.UnityAdapter {
   [DisallowMultipleComponent]
   public class Entity : MonoBehaviour {
-    // hack: using "SerializeReference" to get value without reflection
-    [SerializeReference] public List<ComponentAdapter> components = new();
+    [SerializeReference] public List<IComponentsAdapter> components = new();
 
     public string        worldName;
     public EntityConvert entityConvert = EntityConvert.OnAwake;
@@ -61,16 +58,7 @@ namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapte
 
     public void Add(Type componentType) {
       object component = Activator.CreateInstance(componentType);
-      components.Add(new ComponentAdapter(component));
-    }
-
-    public void Del(Type componentType) {
-      components.Remove(
-        components.First(
-          a =>
-            a.ComponentType == componentType
-        )
-      );
+      components.Add(new OneComponentsAdapter(component));
     }
 
 
@@ -78,7 +66,7 @@ namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapte
     protected virtual void OnCreateEntity(int e, EcsWorld world) { }
 
     protected void AddComponents(int e, EcsWorld world) {
-      foreach (ComponentAdapter component in components) {
+      foreach (IComponentsAdapter component in components) {
         ThrowIfBroken(component);
         component.AddTo(e, world);
       }
@@ -86,9 +74,9 @@ namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapte
 
 
 
-    private void ThrowIfBroken(ComponentAdapter component) {
+    private void ThrowIfBroken(IComponentsAdapter components) {
 #if UNITY_EDITOR
-      if (component.Broken)
+      if (components.Broken)
         throw new Exception($"Entity has broken component! | on \"{name}\"");
 #endif
     }

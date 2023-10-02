@@ -2,7 +2,7 @@
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-namespace Mitfart.LeoECSLite.UnityAdapter.Plugins.Mitfart.LeoECSLite.UnityAdapter.Editor.Extensions.SearchWindow {
+namespace Mitfart.LeoECSLite.UnityAdapter.Editor.Extensions.SearchWindow {
   public static class AddItemExt {
     public static readonly Texture2D IndentationIcon = GetIndentationIcon();
 
